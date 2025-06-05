@@ -1,0 +1,59 @@
+model:  # Model Config
+    model_name: FastEGNN
+    normalize: False
+    hidden_nf: 64
+    n_layers: 4
+    virtual_channels: 3
+    node_feat_nf: 2
+    node_attr_nf: 0
+    edge_attr_nf: 2
+
+
+
+data:  # Data Config
+    data_dir: ./data/mdanalysis  # Change to your dataset directory
+    dataset_name: protein
+    max_samples: 5000
+    batch_size: 5
+    delta_t: 15
+    backbone: True
+    test_rot: False
+    test_trans: False
+
+    accelerate_mode: cutoff_edges
+    radius: 10
+    cutoff_rate: 0.0
+
+
+train:  # Training Config
+    learning_rate: !!float 2e-4
+    weight_decay: !!float 1e-8
+    epochs: 2000
+    early_stop: 100
+    device: 'cuda:0'
+
+    mmd:
+        sigma: 1.0
+        weight: 0.5
+        samples: 3
+
+    accumulation_steps: 1
+    warmup_epochs: 0
+
+    scheduler: None
+
+
+
+log:  # Log Config
+    log_dir: ./logs/protein  # Change to your local log dir
+    test_interval: 2
+
+    wandb:
+        enable: True
+        offline: True
+        api_key: ''  # Add your wandb api key
+        project: ''  # Select your project name
+        entity: ''   # Entity
+
+
+seed: 43

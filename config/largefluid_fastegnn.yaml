@@ -1,0 +1,56 @@
+model:  # Model Config
+    model_name: FastEGNN
+    normalize: False
+    hidden_nf: 64
+    n_layers: 4
+    virtual_channels: 3
+    node_feat_nf: 3
+    node_attr_nf: 2
+    edge_attr_nf: 2
+
+
+data:  # Data Config
+    data_dir: ./data/LargeFluid  # Change to your dataset directory
+    dataset_name: Fluid113K
+    max_samples: 300000
+    batch_size: 1
+    delta_t: 20
+
+    accelerate_mode: distribute
+    outer_radius: 0.050
+    inner_radius: 0.075
+    split_mode: random
+
+
+train:  # Training Config
+    learning_rate: !!float 5e-4
+    weight_decay: !!float 1e-12
+    epochs: 2500
+    early_stop: 100
+    device: 'cuda:3'
+
+    mmd:
+        sigma: 3
+        weight: 0.01
+        samples: 50
+    
+    accumulation_steps: 4
+    warmup_epochs: 0
+
+    scheduler: None
+
+
+
+log:  # Log Config
+    log_dir: ./logs/largefluid  # Change to your local log dir
+    test_interval: 2
+
+    wandb:
+        enable: True
+        offline: True
+        api_key: ''  # Add your wandb api key
+        project: ''  # Select your project name
+        entity: ''   # Entity
+
+
+seed: 43

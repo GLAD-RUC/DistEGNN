@@ -1,0 +1,55 @@
+model:  # Model Config
+    model_name: FastEGNN
+    normalize: False
+    hidden_nf: 64
+    n_layers: 4
+    virtual_channels: 3
+    node_feat_nf: 2
+    node_attr_nf: 0
+    edge_attr_nf: 2
+
+
+data:  # Data Config
+    data_dir: ./data/simulate  # Change to your dataset directory
+    dataset_name: Water-3D
+    max_samples: 300000
+    batch_size: 15
+    delta_t: 20
+
+    accelerate_mode: cutoff_edges
+    radius: 0.035
+    cutoff_rate: 0.0
+
+
+train:  # Training Config
+    learning_rate: !!float 5e-4
+    weight_decay: !!float 1e-12
+    epochs: 2000
+    early_stop: 50
+    device: 'cuda:3'
+
+    mmd:
+        sigma: 1.5
+        weight: 0.01
+        samples: 3
+    
+    accumulation_steps: 1
+    warmup_epochs: 0
+
+    scheduler: None
+
+
+
+log:  # Log Config
+    log_dir: ./logs/water_3d  # Change to your local log dir
+    test_interval: 2
+
+    wandb:
+        enable: True
+        offline: True
+        api_key: ''  # Add your wandb api key
+        project: ''  # Select your project name
+        entity: ''   # Entity
+
+
+seed: 43

@@ -1,0 +1,57 @@
+model:  # Model Config
+    model_name: FastEGNN
+    normalize: True
+    hidden_nf: 64
+    n_layers: 4
+    virtual_channels: 3
+    node_feat_nf: 2
+    node_attr_nf: 0
+    edge_attr_nf: 2
+
+
+
+data:  # Data Config
+    data_dir: ./data/n_body_system  # Change to your dataset directory
+    dataset_name: nbody_100
+    max_samples: 5000
+    batch_size: 250
+    frame_0: 30
+    frame_T: 40
+
+    accelerate_mode: cutoff_edges
+    radius: -1
+    cutoff_rate: 0.0
+
+
+
+train:  # Training Config
+    learning_rate: !!float 5e-4
+    weight_decay: !!float 1e-12
+    epochs: 2500
+    early_stop: 2500
+    device: 'cuda:2'
+
+    mmd:
+        sigma: 1.5
+        weight: 0.03
+        samples: 3
+
+    accumulation_steps: 1
+    warmup_epochs: 0
+
+    scheduler: None
+
+
+log:  # Log Config
+    log_dir: ./logs/nbody  # Change to your local log dir
+    test_interval: 2
+
+    wandb:
+        enable: True
+        offline: True
+        api_key: ''  # Add your wandb api key
+        project: ''  # Select your project name
+        entity: ''   # Entity
+
+
+seed: 43
