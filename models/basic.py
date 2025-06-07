@@ -16,11 +16,6 @@ from torch_geometric.nn import MessagePassing
         GNN
         Linear
         RF
-
-        GVP
-        TFN
-        SchNet
-        DimeNet
 """
 
 
