@@ -55,4 +55,3 @@ You can also download the datasets via Baidu Drive:
 - File Name: DistEGNN_Dataset
 - Link: https://pan.baidu.com/s/15v5t5Gdy2GbxcK0s-KLdaw
 - Code: mfvv
-```

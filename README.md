@@ -2,26 +2,14 @@
 
 We introduce FastEGNN and DistEGNN, two enhanced models specifically designed to handle large sparse graphs efficiently and effectively by incorporating virtual nodes.
 
-<div style="display: flex; align-items: flex-start; justify-content: center; gap: 16px;">
-
-  <div style="flex: 8;">
-    <img src="./assets/FastEGNN.png" alt="FastEGNN" style="height: 200px; width: 100%; object-fit: contain;">
-    <p style="text-align: center; font-style: italic;">FastEGNN.</p>
-  </div>
-
-  <div style="flex: 4.25;">
-    <img src="./assets/DistEGNN.png" alt="DistEGNN" style="height: 200px; width: 100%; object-fit: contain;">
-    <p style="text-align: center; font-style: italic;">DistEGNN.</p>
-  </div>
-
-</div>
+![Framework](./assets/Framework.jpg)
 
 
 ## Environment
 ```bash
-    conda create --name distegnn python=3.9
-    conda activate distegnn
-    pip install -r requirements.txt
+  conda create --name distegnn python=3.9
+  conda activate distegnn
+  pip install -r requirements.txt
 ```
 
 ## Datasets
