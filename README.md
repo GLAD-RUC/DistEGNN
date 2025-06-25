@@ -1,5 +1,7 @@
 # Source code of "Fast and Distributed Equivariant Graph Neural Networks by Virtual Nodes Learning"
 
+[![arXiv](https://img.shields.io/badge/arXiv-2506.19482-b31b1b.svg)](https://arxiv.org/abs/2506.19482)
+
 We introduce FastEGNN and DistEGNN, two enhanced models specifically designed to handle large sparse graphs efficiently and effectively by incorporating virtual nodes.
 
 ![Framework](./assets/Framework.jpg)
@@ -73,6 +75,17 @@ It will random generate a graph `G`, rotation matrix `R` and translation vector 
 ## Citation
 
 If you find our work helpful, please cite as:
+
+```
+@article{zhang2025fast,
+    title={Fast and Distributed Equivariant Graph Neural Networks by Virtual Node Learning},
+    author={Zhang, Yuelin and Cen, Jiacheng and Han, Jiaqi and Huang, Wenbing},
+    journal={arXiv preprint arXiv:2506.19482},
+    year={2025}
+}
+```
+
+This work extends our earlier conference publication. We also appreciate citations to the earlier conference version:
 
 ```
 @inproceedings{
