@@ -32,12 +32,14 @@ We provide two acceleration modes:
 - `data.accelerate == cutoff_edge` enables edge-cutting acceleration, corresponding to the *FastEGNN* model. This mode supports single-device execution.
 - `data.accelerate == distribute` enables distributed acceleration, corresponding to the *DistEGNN* model. This mode supports both single- and multi-device parallelism.
 
-For DistEGNN, we support two graph partitioning methods:
+For DistEGNN, we support four graph partitioning methods:
 
 - `data.split_mode == random` applies random partitioning, followed by graph construction using `data.inner_radius` as the cutoff radius.
-- `data.split_mode == metis` uses the [METIS](https://github.com/KarypisLab/METIS) algorithm for partitioning. In this mode, the graph is first constructed using `data.outer_radius` as the cutoff, then METIS is applied for partitioning, and finally each device constructs subgraphs using `data.inner_radius`.
+- `data.split_mode == kmeans` conducts partition using k-means algorithm, followed by graph construction using `data.inner_radius` as the cutoff radius.
+- `data.split_mode == metis` uses the [METIS](https://github.com/KarypisLab/METIS) for partitioning. In this mode, a pre-built graph is first constructed using `data.outer_radius` as the cutoff, then METIS is applied for partitioning, and finally each device constructs subgraphs using `data.inner_radius`.
+- `data.split_mode == spectral` uses [spectral clustering](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html). In this mode, we construct a weighted graph using an RBF kernel over the node positions, on which the spectral clustering is performed. Finally each device constructs subgraphs using `data.inner_radius`.
 
-If you want to implement a custom partitioning strategy, you can define it in datasets/distribute_graphs.py.
+If you want to implement a custom partitioning strategy, you can define it in `datasets/distribute_graphs.py`.
 
 ## Run
 

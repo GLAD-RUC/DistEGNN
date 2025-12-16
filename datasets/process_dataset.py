@@ -24,7 +24,8 @@ from torch.utils.data import Dataset
 from torch_geometric.data import Data
 from torch_geometric.nn.pool import radius_graph
 
-from datasets.distribute_graphs import split_large_graph_random, split_large_graph_metis
+from datasets.distribute_graphs import split_large_graph_random, split_large_graph_metis, \
+                                        split_large_graph_spectral, split_large_graph_kmeans
 from utils.rotate import random_rotate, random_rotate_y
 
 
@@ -369,6 +370,30 @@ def process_water_3d_dist(rank, world_size, data_dir, dataset_name, outer_radius
                         world_size=world_size,
                         device='cpu',
                     )
+                elif split_mode == 'spectral':
+                    result = split_large_graph_spectral(
+                        pos=position[frame, :, :].cpu(),
+                        x=node_feat.cpu(),
+                        target=position[frame + delta_t, :, :].cpu(),
+                        vel=vel_frame.cpu(),
+                        attr=particle_type.cpu(),
+                        inner_radius=inner_radius,
+                        outer_radius=outer_radius,
+                        world_size=world_size,
+                        device='cpu',
+                    )
+                elif split_mode == 'kmeans':
+                    result = split_large_graph_kmeans(
+                        pos=position[frame, :, :].cpu(),
+                        x=node_feat.cpu(),
+                        target=position[frame + delta_t, :, :].cpu(),
+                        vel=vel_frame.cpu(),
+                        attr=particle_type.cpu(),
+                        inner_radius=inner_radius,
+                        outer_radius=outer_radius,
+                        world_size=world_size,
+                        device='cpu',
+                    )
                 else:
                     raise NotImplementedError(f'{split_mode} not Implemented')
                 # data = result[0]
@@ -499,6 +524,30 @@ def process_large_fluid_dist(rank, world_size, data_dir, dataset_name, outer_rad
                         vel=vel[frame, ...].cpu(),
                         attr=node_attr.cpu(),
                         radius=inner_radius,
+                        world_size=world_size,
+                        device='cpu',
+                    )
+                elif split_mode == 'spectral':
+                    result = split_large_graph_spectral(
+                        pos=position[frame, :, :].cpu(),
+                        x=node_feat.cpu(),
+                        target=position[frame + delta_t, :, :].cpu(),
+                        vel=vel[frame, ...].cpu(),
+                        attr=node_attr.cpu(),
+                        inner_radius=inner_radius,
+                        outer_radius=outer_radius,
+                        world_size=world_size,
+                        device='cpu',
+                    )
+                elif split_mode == 'kmeans':
+                    result = split_large_graph_kmeans(
+                        pos=position[frame, :, :].cpu(),
+                        x=node_feat.cpu(),
+                        target=position[frame + delta_t, :, :].cpu(),
+                        vel=vel[frame, ...].cpu(),
+                        attr=node_attr.cpu(),
+                        inner_radius=inner_radius,
+                        outer_radius=outer_radius,
                         world_size=world_size,
                         device='cpu',
                     )
