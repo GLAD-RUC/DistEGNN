@@ -17,9 +17,9 @@ data:  # Data Config
     delta_t: 20
 
     accelerate_mode: distribute
-    outer_radius: 0.015
+    outer_radius: 0.035
     inner_radius: 0.035
-    split_mode: random
+    split_mode: metis
 
 
 train:  # Training Config
